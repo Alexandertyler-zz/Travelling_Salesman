@@ -1,5 +1,5 @@
 Usage: 
-	python tsp.py **number of tests you want to run sequentially**
+	python tsp.py <number of tests you want to run sequentially>
 
 Note:
 	answer.out is overwritten between runs. If you want to save a 
