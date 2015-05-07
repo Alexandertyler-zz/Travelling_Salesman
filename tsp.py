@@ -2,6 +2,43 @@
 import sys
 
 def is_valid(graph, swap_tour, colors):
+	city_iter = 0
+	r_count = 0
+	b_count = 0
+	curr_color = ''
+	prev_color = ''
+
+	while city_iter < num:
+		curr_city = swap_tour[city_iter]
+		curr_color = colors[curr_city]
+
+		if curr_color != prev_color:
+			r_count = 0
+			b_count = 0
+
+		if curr_color == 'R':
+			r_count += 1
+		else:
+			b_count += 1
+
+		if r_count == 4 or b_count == 4:
+			return False
+
+		prev_color = curr_color
+		city_iter += 1
+
+	#do it for the loop back to the beginning now
+	curr_city = swap_tour[0]
+	curr_color = colors[curr_city]
+	if curr_color != prev_color:
+		return True
+	if curr_color == 'R':
+		r_count += 1
+	else:
+		b_count += 1
+	if r_count == 4 or b_count == 4:
+		return False
+	return True
 	
 
 def tour_cost(graph, swap_tour, num):
@@ -14,13 +51,14 @@ def tour_cost(graph, swap_tour, num):
 		curr_city = swap_tour[city_iter]
 		next_city = swap_tour[city_iter]
 		tour_cost += graph[curr_city][next_city]
+		city_iter += 1
 	#we need to finally move from the last city to the origin
 	tour_cost += graph[next_city][start_city]
 
 def find_optimal_path(num, graph, colors):
 	city_used = [num]
 	tour = [num]
-	invert_tour = [num]
+	swap_tour = [num]
 
 	
 
