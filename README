@@ -1,0 +1,6 @@
+Usage: 
+	python tsp.py **number of tests you want to run sequentially**
+
+Note:
+	answer.out is overwritten between runs. If you want to save a 
+	copy of one either do it by hand or I can write a duplicaiton logging script.
