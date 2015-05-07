@@ -5,3 +5,10 @@ Note:
 	answer.out is overwritten between runs. If you want to save a 
 	copy of one either do it by hand or I can write a duplicaiton 
 	logging script.
+
+Visualization:
+	city_graph is an array of each city. Each city is the index
+	and the elements of each index are the distances from that
+	city to all others. I think we should build a class instead
+	of just an array and make each city have an attribute that
+	is it's color and if its in a path already.
