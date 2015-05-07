@@ -1,7 +1,27 @@
 #!/usr/bin/python
 import sys
 
+def is_valid(graph, swap_tour, colors):
+	
+
+def tour_cost(graph, swap_tour, num):
+	tour_cost = 0
+	city_iter = 0
+	start_city = swap_tour[0]
+	#find the city index in the swap
+	#update the cost from curr city to the next one
+	while city_iter < num-1:
+		curr_city = swap_tour[city_iter]
+		next_city = swap_tour[city_iter]
+		tour_cost += graph[curr_city][next_city]
+	#we need to finally move from the last city to the origin
+	tour_cost += graph[next_city][start_city]
+
 def find_optimal_path(num, graph, colors):
+	city_used = [num]
+	tour = [num]
+	invert_tour = [num]
+
 	
 
 
@@ -14,11 +34,10 @@ def parse_files(test_num):
 		city_graph = [[] for i in range(city_num)]
     	for i in xrange(city_num):
        		city_graph[i] = [int(x) for x in fin.readline().split()]
-    	color_string = fin.readline()
-    	#print city_graph
-
-    	# find an answer, and put into assign
-		result = find_optimal_path(city_num, city_graph, color_string)
+        color_string = fin.readline()
+    	
+        # find an answer, and put into assign
+        result = find_optimal_path(city_num, city_graph, color_string)
 
     	assign = [0] * city_num
     	for i in xrange(city_num):
