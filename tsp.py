@@ -1,6 +1,9 @@
 #!/usr/bin/python
 import sys
 
+def find_optimal_path(num, graph, colors):
+	
+
 
 def parse_files(test_num):
 	fout = open("answer.out", "w")
@@ -12,9 +15,11 @@ def parse_files(test_num):
     	for i in xrange(city_num):
        		city_graph[i] = [int(x) for x in fin.readline().split()]
     	color_string = fin.readline()
-    	print city_graph
+    	#print city_graph
 
     	# find an answer, and put into assign
+		result = find_optimal_path(city_num, city_graph, color_string)
+
     	assign = [0] * city_num
     	for i in xrange(city_num):
        		assign[i] = i+1
