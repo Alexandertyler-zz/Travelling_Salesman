@@ -61,6 +61,22 @@ def find_optimal_path(num, graph, colors):
 	swap_tour = [num]
 
 	
+	#3 swap
+	#for loop for choosing bunch of 3 nodes.
+	#step 1 - build initial tour
+	curr_city = 0
+	used = [0] * num
+	used[0] = 1
+	for next_city in graph[curr_city]:
+		if used[next_city] == 0:
+			if colors[curr_city] != colors[next_city]:
+				#paths[index] = [city in question, cost]
+				paths[path_iter] = [city, city[next_city]]
+						
+				swap_tour[city_index] = city
+				swap_tour[city_index+=1] = next_city
+				used[next_city] = 1
+						
 
 
 def parse_files(test_num):
