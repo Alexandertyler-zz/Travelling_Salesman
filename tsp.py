@@ -89,7 +89,60 @@ def find_optimal_path(num, graph, colors):
 
 	return swap_tour
 	
+def swap_dis_shit(graph, swap_tour, colors, num):
+	"""
+	i=0
+	 1|2|3.
+	 1|3|2.
 
+	i=2
+	 2|1|3
+	 3|1|2
+
+	i=1
+	 3|2|1
+	 2|3|1
+	"""
+	dict = {}
+	while (i < 15):
+		first = random.randint(0,num-1)
+		second = random.randint(0,num-1)
+		while (first == second or colors[swap_tour[first]] != colors[swap_tour[second]]):
+			second = random.randint(0,num-1)
+		third = random.randint(0,num-1)
+		while (first == third or second == third or colors[swap_tour[first]] != colors[swap_tour[third]]):
+			third = random.randint(0,num-1)
+
+		city1 = swap_tour[first]
+		city2 = swap_tour[second]
+		city3 = swap_tour[third]
+		for i in range(0,3):
+			swap_tourc = list(swap_tour)
+			#replace swap_tour[first] with swap_tour two value
+			if i != 0:
+				if i == 2:
+					swap_tourc[second] = city1
+					swap_tourc[first] = city2
+					dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
+				else:
+					swap_tourc[third] = city1
+					swap_tourc[first] = city3
+					dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
+			if i == 0:
+				dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
+			
+			if i == 0:
+				swap_tourc[second] = city3
+				swap_tourc[third] = city2 
+			if i == 1:
+				swap_tourc[second] = city3
+				swap_tourc[first] = city2
+			if i == 2:
+				swap_tourc[first] = city3
+				swap_tourc[third] = city2
+			dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
+		i += 1;
+	return dict
 
 def parse_files(test_num):
 	fout = open("answer.out", "w")
