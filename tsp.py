@@ -48,7 +48,7 @@ def tour_cost(graph, num, swap_tour):
 	#update the cost from curr city to the next one
 	while city_iter < num-1:
 		curr_city = swap_tour[city_iter]
-		next_city = swap_tour[city_iter]
+		next_city = swap_tour[city_iter+1]
 		tour_cost += graph[curr_city][next_city]
 		city_iter += 1
 	#we need to finally move from the last city to the origin
@@ -56,6 +56,7 @@ def tour_cost(graph, num, swap_tour):
 	return tour_cost
 
 def find_optimal_path(num, graph, colors):
+	print "in optimal"
 	city_used = [num]
 	tour = [num]
 	swap_tour = [0] * num
@@ -91,19 +92,19 @@ def find_optimal_path(num, graph, colors):
 	
 
 
-						
-
-
 def parse_files(test_num):
 	fout = open("answer.out", "w")
 	for _iter in xrange(1, int(test_num)+1):
-		fin = open("instances/"+str(test_num) + ".in", "r")
-	
+		fin = open("instances/"+str(_iter) + ".in", "r")
+		print fin
 		city_num = int(fin.readline())
 		city_graph = [[] for i in range(city_num)]
-    	for i in xrange(city_num):
+    	for i in xrange(0,city_num):
+    		#print i
        		city_graph[i] = [int(x) for x in fin.readline().split()]
         color_string = fin.readline()
+        #print color_string
+        #print city_graph
     	
         # find an answer, and put into assign
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
@@ -112,9 +113,7 @@ def parse_files(test_num):
         cost = tour_cost(city_graph, city_num, swap_tour)
         print cost
 
-    	assign = [0] * city_num
-    	for i in xrange(city_num):
-       		assign[i] = i+1
+    	assign = swap_tour
 
     	fout.write("%s\n" % " ".join(map(str, assign)))
 	fout.close()
