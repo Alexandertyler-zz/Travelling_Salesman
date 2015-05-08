@@ -107,7 +107,7 @@ def swap_dis_shit(graph, swap_tour, colors, num):
     j = 0
     dict = {}
     dict[tour_cost(graph,num,swap_tour)] = list(swap_tour)
-    while (j < 100000):
+    while (j < 10000):
         first = random.randint(0,num-1)
         second = random.randint(0,num-1)
         # while (first == second or colors[swap_tour[first]] != colors[swap_tour[second]]):
@@ -156,7 +156,7 @@ def swap_dis_shit(graph, swap_tour, colors, num):
 def invert_swap(swap_tour, num):
 	result = [0] * num
 	for i in range(0, len(swap_tour)):
-		result[swap_tour[i]] = i
+		result[swap_tour[i]] = i+1
 	return result
 
 def parse_files(test_num):
@@ -175,7 +175,7 @@ def parse_files(test_num):
 
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
         res = swap_dis_shit(city_graph, swap_tour, color_string, city_num)
-        print "Result is:", min(res.keys())
+        print "Result " + str(t) +" is:", min(res.keys())
         #print res[min(res.keys())]
         swap_tour = res[min(res.keys())]
         assign = invert_swap(swap_tour, city_num)
