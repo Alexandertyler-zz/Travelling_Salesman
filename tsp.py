@@ -187,6 +187,7 @@ def parse_files(test_num):
         swap_tour = res[min(res.keys())]
         for element in range(0, len(swap_tour)):
             swap_tour[element] = swap_tour[element] + 1
+        assign = swap_tour
         #print swap_tour
         #print assign
 		
