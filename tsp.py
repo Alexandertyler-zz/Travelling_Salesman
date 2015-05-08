@@ -58,36 +58,47 @@ def tour_cost(graph, swap_tour, num):
 def find_optimal_path(num, graph, colors):
 	city_used = [num]
 	tour = [num]
-	swap_tour = [num]
+	swap_tour = [0] * num
 
 	
 	#3 swap
 	#for loop for choosing bunch of 3 nodes.
 	#step 1 - build initial tour
-	print "!!!!num is " + str(num)
+	#print "!!!!num is " + str(num)
 
 	curr_city = 0
 	used = [0] * num
 	print used
-
+	
 	used[0] = 1
-	swap_tour[0] = 0
 	city_count = 0
+	tour_iter = 1
+	#for every city in our graph
 	while city_count < num:
 		local_min = [0, float("inf")]
-		for next_city in graph[curr_city]:
+		#for every city in the range of my current city
+		for next_city in range(0, len(graph[curr_city])):
 			print next_city
 			if used[next_city] == 0:
+				print "next city is unused"
+				print colors[curr_city]
+				print colors[next_city]
+				#print colors
 				if colors[curr_city] != colors[next_city]:
+					print colors[curr_city]
 					#[city traveling to, cost]
+					path = [next_city, graph[curr_city][next_city]]
+					print path
 					if local_min[1] > path[1]:
 						local_min = path
 
 		used[local_min[0]] = 1
-		swap_tour[1] = local_min[0]
 		city_count += 1
+		print local_min
+		swap_tour[city_count] = local_min[0]
 		curr_city = next_city
 	
+	print used
 	print swap_tour
 	
 
@@ -98,7 +109,7 @@ def find_optimal_path(num, graph, colors):
 def parse_files(test_num):
 	fout = open("answer.out", "w")
 	for _iter in xrange(1, int(test_num)+1):
-		fin = open("instances/"+ str(test_num) + ".in", "r")
+		fin = open(str(test_num) + ".in", "r")
 	
 		city_num = int(fin.readline())
 		city_graph = [[] for i in range(city_num)]
