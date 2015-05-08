@@ -1,5 +1,5 @@
 import sys
-
+import random
 def is_valid(graph, colors, num, swap_tour):
     city_iter = 0
     r_count = 0
@@ -103,8 +103,9 @@ def swap_dis_shit(graph, swap_tour, colors, num):
      3|2|1
      2|3|1
     """
+    j = 0
     dict = {}
-    while (i < 15):
+    while (j < 100):
         first = random.randint(0,num-1)
         second = random.randint(0,num-1)
         while (first == second or colors[swap_tour[first]] != colors[swap_tour[second]]):
@@ -116,20 +117,23 @@ def swap_dis_shit(graph, swap_tour, colors, num):
         city1 = swap_tour[first]
         city2 = swap_tour[second]
         city3 = swap_tour[third]
+
         for i in range(0,3):
             swap_tourc = list(swap_tour)
+
             #replace swap_tour[first] with swap_tour two value
             if i != 0:
                 if i == 2:
                     swap_tourc[second] = city1
                     swap_tourc[first] = city2
-                    dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
+                    dict[tour_cost(graph,num,swap_tourc)] = list(swap_tourc)
                 else:
                     swap_tourc[third] = city1
                     swap_tourc[first] = city3
-                    dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
+
+                    dict[tour_cost(graph,num,swap_tourc)] = list(swap_tourc)
             if i == 0:
-                dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
+                dict[tour_cost(graph,num,swap_tourc)] = list(swap_tourc)
             
             if i == 0:
                 swap_tourc[second] = city3
@@ -140,13 +144,13 @@ def swap_dis_shit(graph, swap_tour, colors, num):
             if i == 2:
                 swap_tourc[first] = city3
                 swap_tourc[third] = city2
-            dict[tour_cost(graph,swap_tour,num)] = list(swap_tourc)
-        i += 1;
+            dict[tour_cost(graph,num,swap_tourc)] = list(swap_tourc)
+        j += 1;
     return dict
 
 def parse_files(test_num):
     fout = open("answer.out", "w")
-    for t in range(1, int(test_num)+1):
+    for t in range(int(test_num), int(test_num)+1):
         fin = open("instances/"+str(t) + ".in", "rw")
 
         city_num = int(fin.readline())
@@ -157,11 +161,12 @@ def parse_files(test_num):
             city_graph[graph_iter] = [int(x) for x in line]
         color_string = fin.readline()
         # find an answer, and put into assign
+
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
         result = is_valid(city_graph, color_string, city_num, swap_tour)
-        print result
-        cost = tour_cost(city_graph, city_num, swap_tour)
-        print cost
+        res = swap_dis_shit(city_graph, swap_tour, color_string, city_num)
+        print min(res.keys())
+        print
         assign = '000'
         #assign = swap_tour
 
