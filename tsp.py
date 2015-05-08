@@ -148,7 +148,7 @@ def parse_files(test_num):
     fout = open("answer.out", "w")
     for t in range(1, int(test_num)+1):
         fin = open("instances/"+str(t) + ".in", "rw")
-        print fin
+
         city_num = int(fin.readline())
         city_graph = [[] for i in range(0, city_num)]
 
@@ -156,13 +156,12 @@ def parse_files(test_num):
             line = fin.readline().split()
             city_graph[graph_iter] = [int(x) for x in line]
         color_string = fin.readline()
-        
         # find an answer, and put into assign
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
         result = is_valid(city_graph, color_string, city_num, swap_tour)
-        #print result
+        print result
         cost = tour_cost(city_graph, city_num, swap_tour)
-        #print cost
+        print cost
         assign = '000'
         #assign = swap_tour
 
