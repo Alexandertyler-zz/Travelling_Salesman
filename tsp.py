@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 
-def is_valid(graph, swap_tour, colors):
+def is_valid(graph, colors, num, swap_tour):
 	city_iter = 0
 	r_count = 0
 	b_count = 0
@@ -38,8 +38,7 @@ def is_valid(graph, swap_tour, colors):
 		b_count += 1
 	if r_count == 4 or b_count == 4:
 		return False
-	return True
-	
+	return True	
 
 def tour_cost(graph, swap_tour, num):
 	tour_cost = 0
@@ -59,13 +58,10 @@ def find_optimal_path(num, graph, colors):
 	city_used = [num]
 	tour = [num]
 	swap_tour = [0] * num
-	print "len of swap tour", len(swap_tour)
-
-	
+		
 	#3 swap
 	#for loop for choosing bunch of 3 nodes.
 	#step 1 - build initial tour
-	print "num is " + str(num)
 
 	curr_city = 0
 	used = [0] * num
@@ -89,6 +85,8 @@ def find_optimal_path(num, graph, colors):
 		city_count += 1
 		swap_tour[city_count] = local_min[0]
 		curr_city = local_min[0]
+
+	return swap_tour
 	
 
 
@@ -107,7 +105,9 @@ def parse_files(test_num):
         color_string = fin.readline()
     	
         # find an answer, and put into assign
-        result = find_optimal_path(city_num, city_graph, color_string)
+        swap_tour = find_optimal_path(city_num, city_graph, color_string)
+        result = is_valid(city_graph, color_string, city_num, swap_tour)
+        print result
 
     	assign = [0] * city_num
     	for i in xrange(city_num):
