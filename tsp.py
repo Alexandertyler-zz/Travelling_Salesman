@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import sys
 
 def is_valid(graph, colors, num, swap_tour):
@@ -94,26 +93,29 @@ def find_optimal_path(num, graph, colors):
 
 def parse_files(test_num):
 	fout = open("answer.out", "w")
-	for _iter in xrange(1, int(test_num)+1):
-		fin = open("instances/"+str(_iter) + ".in", "r")
+	for t in range(1, int(test_num)+1):
+		fin = open("instances/"+str(t) + ".in", "rw")
 		print fin
 		city_num = int(fin.readline())
-		city_graph = [[] for i in range(city_num)]
-    	for i in xrange(0,city_num):
-    		#print i
-       		city_graph[i] = [int(x) for x in fin.readline().split()]
+		city_graph = [[] for i in range(0, city_num)]
+		
+		print city_num
+		print range(0, city_num)
+    	for graph_iter in range(0, city_num):
+    		print graph_iter
+       		city_graph[graph_iter] = [int(x) for x in fin.readline().split()]
         color_string = fin.readline()
         #print color_string
-        #print city_graph
+        print city_graph
     	
         # find an answer, and put into assign
-        swap_tour = find_optimal_path(city_num, city_graph, color_string)
-        result = is_valid(city_graph, color_string, city_num, swap_tour)
-        print result
-        cost = tour_cost(city_graph, city_num, swap_tour)
-        print cost
-
-    	assign = swap_tour
+        #swap_tour = find_optimal_path(city_num, city_graph, color_string)
+        #result = is_valid(city_graph, color_string, city_num, swap_tour)
+        #print result
+        #cost = tour_cost(city_graph, city_num, swap_tour)
+        #print cost
+        assign = '000'
+    	#assign = swap_tour
 
     	fout.write("%s\n" % " ".join(map(str, assign)))
 	fout.close()
