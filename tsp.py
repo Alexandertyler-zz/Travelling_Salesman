@@ -172,12 +172,12 @@ def parse_files(test_num):
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
         #result = is_valid(city_graph, color_string, city_num, swap_tour)
         res = swap_dis_shit(city_graph, swap_tour, color_string, city_num)
-        print min(res.keys())
+        print "Result is:", min(res.keys())
         #print res[min(res.keys())]
         swap_tour = res[min(res.keys())]
         assign = invert_swap(swap_tour, city_num)
-        print swap_tour
-        print assign
+        #print swap_tour
+        #print assign
 		
 
         fout.write("%s\n" % " ".join(map(str, assign)))
