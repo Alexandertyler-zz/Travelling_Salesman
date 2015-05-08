@@ -185,7 +185,8 @@ def parse_files(test_num):
         print "Result " + str(t) +" is:", min(res.keys())
         #print res[min(res.keys())]
         swap_tour = res[min(res.keys())]
-        assign = invert_swap(swap_tour, city_num)
+        for element in range(0, length(swap_tour)):
+            swap_tour[element] = swap_tour[element] + 1
         #print swap_tour
         #print assign
 		
