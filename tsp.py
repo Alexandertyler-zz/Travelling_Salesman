@@ -108,16 +108,16 @@ def swap_dis_shit(graph, swap_tour, colors, num):
     while (j < 100000):
         first = random.randint(0,num-1)
         second = random.randint(0,num-1)
-        while (first == second or colors[swap_tour[first]] != colors[swap_tour[second]]):
-            second = random.randint(0,num-1)
+        # while (first == second or colors[swap_tour[first]] != colors[swap_tour[second]]):
+            # second = random.randint(0,num-1)
         third = random.randint(0,num-1)
-        while (first == third or second == third or colors[swap_tour[first]] != colors[swap_tour[third]]):
-            third = random.randint(0,num-1)
+        # while (first == third or second == third or colors[swap_tour[first]] != colors[swap_tour[third]]):
+            # third = random.randint(0,num-1)
 
         city1 = swap_tour[first]
         city2 = swap_tour[second]
         city3 = swap_tour[third]
-
+       
         for i in range(0,3):
             swap_tourc = list(swap_tour)
 
@@ -144,7 +144,10 @@ def swap_dis_shit(graph, swap_tour, colors, num):
             if i == 2:
                 swap_tourc[first] = city3
                 swap_tourc[third] = city2
-            dict[tour_cost(graph,num,swap_tourc)] = list(swap_tourc)
+                
+            if is_valid(graph, colors, num, swap_tourc):
+                dict[tour_cost(graph,num,swap_tourc)] = list(swap_tourc)
+
         j += 1;
     return dict
 
@@ -163,7 +166,7 @@ def parse_files(test_num):
         # find an answer, and put into assign
 
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
-        result = is_valid(city_graph, color_string, city_num, swap_tour)
+        # result = is_valid(city_graph, color_string, city_num, swap_tour)
         res = swap_dis_shit(city_graph, swap_tour, color_string, city_num)
         print min(res.keys())
         print res[min(res.keys())]
