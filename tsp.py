@@ -1,5 +1,6 @@
 import sys
 import random
+
 def is_valid(graph, colors, num, swap_tour):
     city_iter = 0
     r_count = 0
@@ -55,7 +56,7 @@ def tour_cost(graph, num, swap_tour):
     return tour_cost
 
 def find_optimal_path(num, graph, colors):
-    print "in optimal"
+    #print "in optimal"
     city_used = [num]
     tour = [num]
     swap_tour = [0] * num
@@ -148,6 +149,12 @@ def swap_dis_shit(graph, swap_tour, colors, num):
         j += 1;
     return dict
 
+def invert_swap(swap_tour, num):
+	result = [0] * num
+	for i in range(0, len(swap_tour)):
+		result[swap_tour[i]] = i
+	return result
+
 def parse_files(test_num):
     fout = open("answer.out", "w")
     for t in range(1, int(test_num)+1):
@@ -163,15 +170,15 @@ def parse_files(test_num):
         # find an answer, and put into assign
 
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
-        result = is_valid(city_graph, color_string, city_num, swap_tour)
+        #result = is_valid(city_graph, color_string, city_num, swap_tour)
         res = swap_dis_shit(city_graph, swap_tour, color_string, city_num)
         print min(res.keys())
-        print res[min(res.keys())]
+        #print res[min(res.keys())]
         swap_tour = res[min(res.keys())]
-        result = is_valid(city_graph, color_string, city_num, swap_tour)
-        print result
-        assign = '000'
-        #assign = swap_tour
+        assign = invert_swap(swap_tour, city_num)
+        print swap_tour
+        print assign
+		
 
         fout.write("%s\n" % " ".join(map(str, assign)))
     fout.close()
