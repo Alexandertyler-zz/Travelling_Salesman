@@ -40,7 +40,7 @@ def is_valid(graph, colors, num, swap_tour):
 		return False
 	return True	
 
-def tour_cost(graph, swap_tour, num):
+def tour_cost(graph, num, swap_tour):
 	tour_cost = 0
 	city_iter = 0
 	start_city = swap_tour[0]
@@ -53,6 +53,7 @@ def tour_cost(graph, swap_tour, num):
 		city_iter += 1
 	#we need to finally move from the last city to the origin
 	tour_cost += graph[next_city][start_city]
+	return tour_cost
 
 def find_optimal_path(num, graph, colors):
 	city_used = [num]
@@ -108,6 +109,8 @@ def parse_files(test_num):
         swap_tour = find_optimal_path(city_num, city_graph, color_string)
         result = is_valid(city_graph, color_string, city_num, swap_tour)
         print result
+        cost = tour_cost(city_graph, city_num, swap_tour)
+        print cost
 
     	assign = [0] * city_num
     	for i in xrange(city_num):
