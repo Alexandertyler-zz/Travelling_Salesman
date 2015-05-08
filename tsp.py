@@ -105,7 +105,7 @@ def swap_dis_shit(graph, swap_tour, colors, num):
     """
     j = 0
     dict = {}
-    while (j < 100):
+    while (j < 100000):
         first = random.randint(0,num-1)
         second = random.randint(0,num-1)
         while (first == second or colors[swap_tour[first]] != colors[swap_tour[second]]):
@@ -150,7 +150,7 @@ def swap_dis_shit(graph, swap_tour, colors, num):
 
 def parse_files(test_num):
     fout = open("answer.out", "w")
-    for t in range(int(test_num), int(test_num)+1):
+    for t in range(1, int(test_num)+1):
         fin = open("instances/"+str(t) + ".in", "rw")
 
         city_num = int(fin.readline())
@@ -166,7 +166,10 @@ def parse_files(test_num):
         result = is_valid(city_graph, color_string, city_num, swap_tour)
         res = swap_dis_shit(city_graph, swap_tour, color_string, city_num)
         print min(res.keys())
-        print
+        print res[min(res.keys())]
+        swap_tour = res[min(res.keys())]
+        result = is_valid(city_graph, color_string, city_num, swap_tour)
+        print result
         assign = '000'
         #assign = swap_tour
 
