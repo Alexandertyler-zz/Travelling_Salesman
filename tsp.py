@@ -108,7 +108,7 @@ def swap_dis_shit(graph, swap_tour, colors, num):
     j = 0
     dict = {}
     dict[tour_cost(graph,num,swap_tour)] = list(swap_tour)
-    while (j < 1000000):
+    while (j < 10000):
         first = random.randint(0,num-1)
         second = random.randint(0,num-1)
         # while (first == second or colors[swap_tour[first]] != colors[swap_tour[second]]):
