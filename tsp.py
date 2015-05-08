@@ -7,7 +7,8 @@ def is_valid(graph, colors, num, swap_tour):
     b_count = 0
     curr_color = ''
     prev_color = ''
-
+    if not (len(swap_tour) == set(swap_tour)):
+        return False
     while city_iter < num:
         curr_city = swap_tour[city_iter]
         curr_color = colors[curr_city]
